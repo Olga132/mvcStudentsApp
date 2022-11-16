@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<header>
+  <meta charset="UTF-8">
+  <title>Layout</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+</header>
+<body>
+<div th:fragment="test">
+  <p>
+    test
+  </p>
+</div>
+
+
+<div class="container-fluid text-center fixed-bottom text-bg-success " th:fragment="footer">
+  &copy; 2022 Footer
+</div>
+
+</body>
+</html>
