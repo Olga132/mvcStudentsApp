@@ -5,10 +5,17 @@
     <meta charset="UTF-8">
     <title>Error</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/content-footer.css}"/>
 </header>
 <body>
-<h1>Something went wrong! </h1>
-<h2>[[${message}]]</h2>
-<a th:href="@{/}">Go Home</a>
+<div class="wrapper">
+    <div class="content">
+        <h1>Something went wrong! </h1>
+        <h2>[[${message}]]</h2>
+        <a th:href="@{/}">Go Home</a>
+
+    </div>
+    <footer th:insert="layout/layouts :: 'footer'"></footer>
+</div>
 </body>
 </html>

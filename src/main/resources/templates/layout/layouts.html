@@ -7,16 +7,27 @@
   <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
 </header>
 <body>
-<div th:fragment="test">
-  <p>
-    test
-  </p>
+
+
+<div class="container-fluid text-center navbar-light bg-light" th:fragment="navs">
+  <ul class="nav justify-content-center">
+    <li class="nav-item">
+      <a class="navbar-brand" aria-current="page" th:href="@{/}">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="navbar-brand" th:href="@{/students}">Students</a>
+    </li>
+    <li class="nav-item">
+      <a class="navbar-brand" th:href="@{/groups}">Groups</a>
+    </li>
+  </ul>
 </div>
 
 
-<div class="container-fluid text-center fixed-bottom text-bg-success " th:fragment="footer">
-  &copy; 2022 Footer
+<div class="d-flex justify-content-center py-2 my-4 border-top text-center" th:fragment="footer">
+  <p>&copy; 2022 Footer</p>
 </div>
+
 
 </body>
 </html>

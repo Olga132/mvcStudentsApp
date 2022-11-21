@@ -2,18 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Home Page</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/content-footer.css}"/>
 </head>
 <body>
-<div class="container-fluid text-center">
-  <h1>Welcome to Students Web App</h1>
+<div class="wrapper">
+    <div class="container-fluid text-center content">
+        <h1>Welcome to Students Web App</h1>
+        <ul class="list-group">
+            <li><a th:href="@{/students}" class="header">Manager Students</a></li>
+            <li><a th:href="@{/groups}" class="header">Manager Groups</a></li>
+        </ul>
+    </div>
+    <footer th:insert="layout/layouts :: 'footer'"></footer>
 </div>
-
-
-<a th:href="@{/students}" class="header">Manager Students</a>
-
-
 </body>
 </html>

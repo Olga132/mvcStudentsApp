@@ -1,5 +1,8 @@
 package com.example.mvcstudentsapp.entities;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -14,8 +17,13 @@ public class Group {
     @Column(nullable = false, length = 50)
     private String groupName;
 
-    @OneToMany(mappedBy = "group")
+    @OneToMany(mappedBy = "group", cascade = {CascadeType.PERSIST})
     private Set<Student> students;
+
+    @PreRemove
+    private void preRemove(){
+        students.forEach(student -> student.setGroup(null));
+    }
 
     public Long getId() {
         return id;
@@ -35,7 +43,6 @@ public class Group {
 
     @Override
     public String toString() {
-        return "Group id=" + id +
-                ", groupName='" + groupName;
+        return groupName;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.mvcstudentsapp.controllers;
 
 import com.example.mvcstudentsapp.entities.Student;
+import com.example.mvcstudentsapp.services.GroupService;
 import com.example.mvcstudentsapp.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,18 +10,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/students")
 public class StudentController {
     @Autowired
-    private StudentService service;
+    private StudentService studentService;
 
+    @Autowired
+    private GroupService groupService;
 
     @GetMapping()
     public String showAll(Model model) {
-        List<Student> listStudents = service.getAll();
+        List<Student> listStudents = studentService.getAll();
         model.addAttribute("listStudents", listStudents);
         return "students";
     }
@@ -28,26 +30,28 @@ public class StudentController {
     @GetMapping("/add")
     public String addNew(Model model) {
         model.addAttribute("student", new Student());
+        model.addAttribute("groupsList",groupService.listAllGroups());
         return "student-form";
     }
 
     @GetMapping("/details/{id}")
     public String showDetails(Model modal, @PathVariable(value = "id") Long id){
-        Student student = service.getById(id).get();
+        Student student = studentService.getById(id).get();
         modal.addAttribute(student);
         return "student-details";
     }
 
     @GetMapping("/editForm/{id}")
     public String editForm(Model modal, @PathVariable(value = "id", required = false) Long id){
-        Student student = service.getById(id).get();
+        Student student = studentService.getById(id).get();
         modal.addAttribute("student",student);
+        modal.addAttribute("groupsList",groupService.listAllGroups());
         return "student-form";
     }
 
     @PostMapping("/editForm")
     public String addOrEditForm(Student student, RedirectAttributes ra){
-        Student std = service.save(student);
+        Student std = studentService.save(student);
         // 2. добавить сообщение о том, что студент добавлен
         ra.addFlashAttribute("message",
                 "Student " + std + " saved successfully");
@@ -63,7 +67,7 @@ public class StudentController {
 
     @GetMapping("/remove/{id}")
     public String removeById(@PathVariable(value = "id") Long id, RedirectAttributes ra){
-        service.deleteById(id);
+        studentService.deleteById(id);
         ra.addFlashAttribute("message", "Student delete");
         return "redirect:/students";
     }

@@ -4,18 +4,24 @@
     <meta charset="UTF-8">
     <title>Student details</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/content-footer.css}"/>
 </head>
 <body>
-    <div class="container-fluid text-center">
+<div class="wrapper">
+    <div class="container-fluid text-center content">
+        <header th:insert="layout/layouts.html :: 'navs' "></header>
         <h3>Student Details</h3>
         <ul class="list-group">
             <li th:text="${'ID: ' + student}"></li>
             <li th:text="${'Name: ' + student.name}"></li>
             <li th:text="${'Lastname: ' + student.lastname}"></li>
+            <li th:text="${'Group: ' + student.group.groupName}"></li>
         </ul>
         <a th:href="@{/students}" class="btn btn-secondary">Back</a>
     </div>
 
     <footer th:insert="layout/layouts :: 'footer'"></footer>
+</div>
+
 </body>
 </html>
