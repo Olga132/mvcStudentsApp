@@ -2,6 +2,7 @@ package com.example.mvcstudentsapp.entities;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name="student")
@@ -21,6 +22,9 @@ public class Student {
     @ManyToOne
     @JoinColumn(name = "group_id", nullable = true)
     private Group group;
+
+    @OneToMany(mappedBy = "student", cascade = {CascadeType.PERSIST})
+    private Set<Assessment> assessments;
 
     public Group getGroup() {
         return group;

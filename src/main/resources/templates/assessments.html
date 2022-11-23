@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Assessments</title>
+    <!--    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+            integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="wrapper">
+    <header th:insert="layout/layouts.html :: 'navs' "></header>
+    <div th:if="${message != null}" class="alert alert-success"> [[${message}]]</div>
+
+    <div class="container-fluid text-center content">
+        <h3>Assessments list</h3>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Student</th>
+                <th>Date</th>
+                <th>Subject</th>
+                <th>Assessment</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="assessmentV : ${listAssessments}">
+                <td th:text="${assessmentV.id}"/>
+                <td th:text="${assessmentV.student}"/>
+<!--                <td th:text="${assessmentV.date}"/>-->
+                <td th:text="${#temporals.format(assessmentV.date, 'dd-MM-yyyy')}"/>
+                <td th:text="${assessmentV.subject}"/>
+                <td th:text="${assessmentV.assessment}"/>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            Action button
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+<!--                            <li><a class="dropdown-item" th:href="@{'/students/details/' + ${student.id}}"-->
+<!--                                   th:text="Details"/></li>-->
+<!--                            <li><a class="dropdown-item" th:href="@{'/students/editForm/' + ${student.id}}"-->
+<!--                                   th:text="Update"/></li>-->
+                            <li><a class="dropdown-item" th:href="@{'/assessment/remove/' + ${assessmentV.id}}"
+                                   th:text="Delete"/>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!--                <a th:href="@{'/students/details/' + ${student.id}}" th:text="Details" class="btn btn-info"/>-->
+                    <!--                <a th:href="@{'/students/editForm/' + ${student.id}}" th:text="Update" class="btn btn-success"/>-->
+                    <!--                <a th:href="@{'/students/remove/' + ${student.id}}" th:text="Delete" class="btn btn-danger"/>-->
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+        <a th:href="@{/assessments/add}" class="btn btn-secondary"> Add new assessment </a>
+    </div>
+    <footer th:insert="layout/layouts :: 'footer'"></footer>
+</div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.example.mvcstudentsapp.controllers;
 
+import com.example.mvcstudentsapp.controllers.filter.StudentNameFilter;
 import com.example.mvcstudentsapp.entities.Student;
 import com.example.mvcstudentsapp.services.GroupService;
 import com.example.mvcstudentsapp.services.StudentService;
@@ -20,12 +21,34 @@ public class StudentController {
     @Autowired
     private GroupService groupService;
 
+    @Autowired
+    private StudentNameFilter containsFilter;   // объект фильтра
+
+//    @GetMapping()
+//    public String showAll(Model model) {
+//        List<Student> listStudents = studentService.getAll();
+//        model.addAttribute("listStudents", listStudents);
+//        model.addAttribute("containsFilter", containsFilter);
+//        return "students";
+//    }
+
     @GetMapping()
-    public String showAll(Model model) {
-        List<Student> listStudents = studentService.getAll();
+    public String showAll(Model model, @RequestParam(value = "match", required = false) String match) {
+        List<Student> listStudents = studentService.getAllWithFilter(match);
         model.addAttribute("listStudents", listStudents);
+        model.addAttribute("match", match);
         return "students";
     }
+
+    @PostMapping()
+    public String showFilteredStudents(StudentNameFilter filter, Model model) {
+        List<Student> studentList = filter.getFilteredStudents(studentService);
+        model.addAttribute("studentsList", studentList);
+        model.addAttribute("containsFilter", filter);
+        return "students";
+    }
+
+
 
     @GetMapping("/add")
     public String addNew(Model model) {

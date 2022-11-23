@@ -17,6 +17,14 @@ public class StudentService {
     public List<Student> getAll(){
         return (List<Student>)studentDAO.findAll();
     }
+    public List<Student> getAllWithFilter(String match){
+        List<Student> studentList = (List<Student>)studentDAO.findAll();
+        if (match == null)
+            return studentList;
+        return studentList.stream().filter(student -> student.getName().contains(match)).toList();
+    }
+
+
 
     public Student save(Student student){
         return studentDAO.save(student);
@@ -36,5 +44,15 @@ public class StudentService {
 
     public Optional<Student> getById(Long id){
         return studentDAO.findById(id);
+    }
+
+    // получения студентов по строке
+    public List<Student> findByContains(String match) {
+        if (match == null || match.equals(""))
+            return (List<Student>)studentDAO.findAll();
+        return ((List<Student>)studentDAO.findAll())
+                .stream()
+                .filter(s -> s.getName().contains(match) || s.getLastname().contains(match))
+                .toList();
     }
 }

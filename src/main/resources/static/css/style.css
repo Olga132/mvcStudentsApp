@@ -1,0 +1,24 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+    flex: 1
+}
+
+
+.main
+{
+    display: flex;
+    justify-content: space-between;
+    /*flex-direction: row;*/
+    /*flex-wrap: nowrap;*/
+}
+
+.main__item
+{
+    padding: 10px;
+    margin-right: 5px;
+}

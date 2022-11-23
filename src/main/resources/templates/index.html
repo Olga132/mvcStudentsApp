@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Home Page</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/content-footer.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
 <div class="wrapper">
@@ -14,6 +14,8 @@
         <ul class="list-group">
             <li><a th:href="@{/students}" class="header">Manager Students</a></li>
             <li><a th:href="@{/groups}" class="header">Manager Groups</a></li>
+            <li><a th:href="@{/assessments}" class="header">Manager Assessments</a></li>
+            <li><a th:href="@{/subjects}" class="header">Subjects list</a></li>
         </ul>
     </div>
     <footer th:insert="layout/layouts :: 'footer'"></footer>
