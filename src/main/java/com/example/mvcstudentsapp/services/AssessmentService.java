@@ -33,8 +33,8 @@ public class AssessmentService {
         return assessmentRepository.findAvgAssessmentsByStudentId(studentId);
     }
 
-    public Double findAvgScoreAllAssessmentByStudentId(long studentId) {
-        return assessmentRepository.findAvgScoreAllAssessmentByStudentId(studentId);
+    public Double findAvgScoreSubjectByStudentId(long studentId) {
+        return assessmentRepository.findAvgScoreSubjectByStudentId(studentId);
     }
 
 //    public List<Assessment> findAllStudentGrades(long studentId){

@@ -15,44 +15,66 @@
             <li th:text="${'ID: ' + student}"></li>
             <li th:text="${'Name: ' + student.name}"></li>
             <li th:text="${'Lastname: ' + student.lastname}"></li>
-            <li th:text="${'Group: ' + student.group.groupName}"></li>
+            <div th:if="${student.group != null}">
+                <li th:text="${'Group:'  + student.group.groupName}"></li>
+            </div>
+            <div th:if="${student.group == null}">
+                <li th:text="${'Group: none'}"></li>
+            </div>
         </ul>
         <a th:href="@{/students}" class="btn btn-secondary">Back</a>
     </div>
-
     <h3>Assessments Details</h3>
     <h5>AVG</h5>
-    <ul>
-        <li th:text="${'overall GPA: ' + avgValue}"></li>
-    </ul>
+    <div th:if="${avgValue != null}">
+        <h5 th:text="${'Overall GPA: ' + avgValue}"></h5>
+    </div>
+    <div th:if="${avgValue == null}">
+        There is no average score in subjects
+    </div>
+
     <h5>AVG subjects</h5>
+    <div th:if="${allAssessmentsAVG != null}">
     <table>
         <tr th:each="instance : ${allAssessmentsAVG}">
             <td th:text="${instance}"></td>
         </tr>
     </table>
+    </div>
+    <div th:if="${allAssessmentsAVG == null}">
+        There is no average score
+    </div>
 
     <h5>Table all assessments</h5>
-    <table class="table table-bordered">
-        <thead class="table-dark">
-        <tr>
-            <th>Id</th>
-            <th>Subject</th>
-            <th>Date</th>
-            <th>Assessment</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="assessment : ${assessmentList}">
-            <td th:text="${assessment.id}"/>
-            <td th:text="${assessment.subject}"/>
-            <td th:text="${assessment.date}"/>
-            <td th:text="${assessment.assessment}"/>
-            </td>
-        </tr>
-        </tbody>
+    <div  th:if="!${#lists.isEmpty(assessmentList)}">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Subject</th>
+                <th>Date</th>
+                <th>Assessment</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="assessment : ${assessmentList}">
+                <td th:text="${assessment.id == null ? 'none' : assessment.id}"/>
+                <td th:text="${assessment.subject == null ? 'none' : assessment.subject}"/>
+                <td th:text="${assessment.date == null ? 'none' : assessment.date}"/>
+                <td th:text="${assessment.assessment == null ? 'none' : assessment.assessment}"/>
+                </td>
+            </tr>
+            </tbody>
 
-    </table>
+        </table>
+    </div>
+    <div th:if="${#lists.isEmpty(assessmentList)}">
+        No assessments
+    </div>
+
+
+
+
 
     <footer th:insert="layout/layouts :: 'footer'"></footer>
 </div>

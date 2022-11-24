@@ -21,7 +21,7 @@ public interface AssessmentRepository extends CrudRepository<Assessment, Long>, 
 
     // получения среднего балла студента по всем предметам по Id студента
     @Query("select avg(a.assessment) from Assessment a where a.student.id=:studentId")
-    Double findAvgScoreAllAssessmentByStudentId(@Param("studentId") long studentId);
+    Double findAvgScoreSubjectByStudentId(@Param("studentId") long studentId);
 
 
 }
