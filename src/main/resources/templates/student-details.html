@@ -20,6 +20,28 @@
         <a th:href="@{/students}" class="btn btn-secondary">Back</a>
     </div>
 
+    <h3>Assessments Details</h3>
+    <table class="table table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Subject</th>
+            <th>Date</th>
+            <th>Assessment</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="assessment : ${assessmentList}">
+            <td th:text="${assessment.id}"/>
+            <td th:text="${assessment.subject}"/>
+            <td th:text="${assessment.date}"/>
+            <td th:text="${assessment.assessment}"/>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
     <footer th:insert="layout/layouts :: 'footer'"></footer>
 </div>
 

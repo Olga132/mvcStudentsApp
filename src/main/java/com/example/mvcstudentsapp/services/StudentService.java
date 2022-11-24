@@ -14,6 +14,7 @@ public class StudentService {
     @Autowired
     StudentRepository studentDAO;
 
+
     public List<Student> getAll(){
         return (List<Student>)studentDAO.findAll();
     }

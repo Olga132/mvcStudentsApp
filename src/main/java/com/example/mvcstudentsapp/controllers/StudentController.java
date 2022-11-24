@@ -2,6 +2,7 @@ package com.example.mvcstudentsapp.controllers;
 
 import com.example.mvcstudentsapp.controllers.filter.StudentNameFilter;
 import com.example.mvcstudentsapp.entities.Student;
+import com.example.mvcstudentsapp.services.AssessmentService;
 import com.example.mvcstudentsapp.services.GroupService;
 import com.example.mvcstudentsapp.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class StudentController {
 
     @Autowired
     private GroupService groupService;
+
+    @Autowired
+    private AssessmentService assessmentService;
 
     @Autowired
     private StudentNameFilter containsFilter;   // объект фильтра
@@ -61,6 +65,7 @@ public class StudentController {
     public String showDetails(Model modal, @PathVariable(value = "id") Long id){
         Student student = studentService.getById(id).get();
         modal.addAttribute(student);
+        modal.addAttribute("assessmentList", assessmentService.findAllStudentGrades(id));
         return "student-details";
     }
 
