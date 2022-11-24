@@ -1,6 +1,7 @@
 package com.example.mvcstudentsapp.controllers;
 
 import com.example.mvcstudentsapp.controllers.filter.StudentNameFilter;
+import com.example.mvcstudentsapp.entities.Assessment;
 import com.example.mvcstudentsapp.entities.Student;
 import com.example.mvcstudentsapp.entities.Subject;
 import com.example.mvcstudentsapp.services.AssessmentService;
@@ -67,11 +68,12 @@ public class StudentController {
     public String showDetails(Model modal, @PathVariable(value = "id") Long id){
         Student student = studentService.getById(id).get();
         modal.addAttribute(student);
-        modal.addAttribute("assessmentList", assessmentService.findAllAssessmentByStudentId(id));
-        modal.addAttribute("avgValue", assessmentService.findAvgScoreAllAssessmentByStudentId(id));
-//        modal.addAttribute("assessmentAVGMap", assessmentService.findAvgAssessmentsByStudentId(id));
-        Map<Subject,Double> map = assessmentService.findAvgAssessmentsByStudentId(id);
-        map.forEach((key, value) -> System.out.println(key + ":" + value));
+        List<Assessment> assessmentList = assessmentService.findAllAssessmentByStudentId(id);
+        if (!assessmentList.isEmpty()) {
+            modal.addAttribute("assessmentList", assessmentList);
+            modal.addAttribute("avgValue", assessmentService.findAvgScoreAllAssessmentByStudentId(id));
+            modal.addAttribute("allAssessmentsAVG", assessmentService.findAvgAssessmentsByStudentId(id));
+        }
         return "student-details";
     }
 

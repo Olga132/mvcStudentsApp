@@ -29,7 +29,7 @@ public class AssessmentService {
         return assessmentRepository.findAllAssessmentByStudentId(studentId);
     }
 
-    public Map<Subject,Double> findAvgAssessmentsByStudentId(long studentId){
+    public List<String> findAvgAssessmentsByStudentId(long studentId){
         return assessmentRepository.findAvgAssessmentsByStudentId(studentId);
     }
 
