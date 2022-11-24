@@ -1,14 +1,14 @@
 package com.example.mvcstudentsapp.services;
 
 import com.example.mvcstudentsapp.entities.Assessment;
+import com.example.mvcstudentsapp.entities.Subject;
 import com.example.mvcstudentsapp.repositories.AssessmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AssessmentService {
@@ -25,27 +25,29 @@ public class AssessmentService {
         return assessmentRepository.save(assessment);
     }
 
-//    @Query(value = "SELECT ass.subject_id, AVG(ass.assessment) FROM assessment_t ass WHERE ass.student_id = ?1 group by ass.subject_id" , nativeQuery = true)
-//    public void getAverageScoreInSubjects(Integer studentId){
+    public List<Assessment> findAllAssessmentByStudentId(long studentId){
+        return assessmentRepository.findAllAssessmentByStudentId(studentId);
+    }
+
+    public Map<Subject,Double> findAvgAssessmentsByStudentId(long studentId){
+        return assessmentRepository.findAvgAssessmentsByStudentId(studentId);
+    }
+
+    public Double findAvgScoreAllAssessmentByStudentId(long studentId) {
+        return assessmentRepository.findAvgScoreAllAssessmentByStudentId(studentId);
+    }
+
+//    public List<Assessment> findAllStudentGrades(long studentId){
+//        List<Assessment> ass = (List<Assessment>) assessmentRepository.findAll();
+//        List<Assessment> result = new ArrayList<>();
+//        for (Assessment a: ass
+//             ) {
+//            if(a.getStudent().getId() == studentId){
+//                result.add(a);
+//            }
+//        }
+//
+//        return result;
 //
 //    }
-
-//    @Query("SELECT AVG(ass.assessment) from Assessment ass where ass.student.id=:studentId")
-//    public double findAverageScoreStudent(@Param("studentId") long studentId){
-//        return
-//    }
-
-    public List<Assessment> findAllStudentGrades(long studentId){
-        List<Assessment> ass = (List<Assessment>) assessmentRepository.findAll();
-        List<Assessment> result = new ArrayList<>();
-        for (Assessment a: ass
-             ) {
-            if(a.getStudent().getId() == studentId){
-                result.add(a);
-            }
-        }
-
-        return result;
-
-    }
 }

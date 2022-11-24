@@ -15,8 +15,8 @@ public class Subject {
     @Column(nullable = false, length = 50)
     private String subjectName;
 
-//    @OneToMany(mappedBy = "subject")
-//    private Set<Assessment> assessments;
+    @OneToMany(mappedBy = "subject")
+    private Set<Assessment> assessments;
 
     public Long getId() {
         return id;
@@ -34,13 +34,13 @@ public class Subject {
         this.subjectName = subjectName;
     }
 
-//    public Set<Assessment> getAssessments() {
-//        return assessments;
-//    }
-//
-//    public void setAssessments(Set<Assessment> assessments) {
-//        this.assessments = assessments;
-//    }
+    public Set<Assessment> getAssessments() {
+        return assessments;
+    }
+
+    public void setAssessments(Set<Assessment> assessments) {
+        this.assessments = assessments;
+    }
 
     @Override
     public String toString() {

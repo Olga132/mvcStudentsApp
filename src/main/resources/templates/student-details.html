@@ -21,6 +21,17 @@
     </div>
 
     <h3>Assessments Details</h3>
+    <h5>AVG</h5>
+    <ul>
+        <li th:text="${'overall GPA: ' + avgValue}"></li>
+    </ul>
+    <h5>AVG subjects</h5>
+<!--    <tr th:each="ass : ${assessmentAVGMap}">-->
+<!--        <td th:text="${ass.key}">key</td>-->
+<!--        <td th:text="${ass.value}">num</td>-->
+<!--    </tr>-->
+
+    <h5>Table all assessments</h5>
     <table class="table table-bordered">
         <thead class="table-dark">
         <tr>

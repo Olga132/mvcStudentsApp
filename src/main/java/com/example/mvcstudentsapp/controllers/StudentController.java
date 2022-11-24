@@ -2,6 +2,7 @@ package com.example.mvcstudentsapp.controllers;
 
 import com.example.mvcstudentsapp.controllers.filter.StudentNameFilter;
 import com.example.mvcstudentsapp.entities.Student;
+import com.example.mvcstudentsapp.entities.Subject;
 import com.example.mvcstudentsapp.services.AssessmentService;
 import com.example.mvcstudentsapp.services.GroupService;
 import com.example.mvcstudentsapp.services.StudentService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/students")
@@ -65,7 +67,11 @@ public class StudentController {
     public String showDetails(Model modal, @PathVariable(value = "id") Long id){
         Student student = studentService.getById(id).get();
         modal.addAttribute(student);
-        modal.addAttribute("assessmentList", assessmentService.findAllStudentGrades(id));
+        modal.addAttribute("assessmentList", assessmentService.findAllAssessmentByStudentId(id));
+        modal.addAttribute("avgValue", assessmentService.findAvgScoreAllAssessmentByStudentId(id));
+//        modal.addAttribute("assessmentAVGMap", assessmentService.findAvgAssessmentsByStudentId(id));
+        Map<Subject,Double> map = assessmentService.findAvgAssessmentsByStudentId(id);
+        map.forEach((key, value) -> System.out.println(key + ":" + value));
         return "student-details";
     }
 
