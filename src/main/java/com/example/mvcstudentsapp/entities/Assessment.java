@@ -1,5 +1,7 @@
 package com.example.mvcstudentsapp.entities;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -20,14 +22,16 @@ public class Assessment {
 
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Student student;
 
     @ManyToOne
     @JoinColumn(name = "subject_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Subject subject;
 
     @Column(name = "assessment", nullable = false)
-    private int assessment;
+    private Integer assessment;
 
     public Long getId() {
         return id;
@@ -61,11 +65,11 @@ public class Assessment {
         this.subject = subject;
     }
 
-    public int getAssessment() {
+    public Integer getAssessment() {
         return assessment;
     }
 
-    public void setAssessment(int assessment) {
+    public void setAssessment(Integer assessment) {
         this.assessment = assessment;
     }
 

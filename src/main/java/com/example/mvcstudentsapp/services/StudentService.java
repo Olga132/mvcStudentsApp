@@ -53,7 +53,6 @@ public class StudentService {
             return (List<Student>)studentDAO.findAll();
         return ((List<Student>)studentDAO.findAll())
                 .stream()
-                .filter(s -> s.getName().contains(match) || s.getLastname().contains(match))
-                .toList();
+                .filter(s -> s.getName().contains(match)).toList();
     }
 }

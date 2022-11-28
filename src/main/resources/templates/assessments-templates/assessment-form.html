@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add assessment</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="wrapper ass-form">
+    <div class="content">
+        <header th:insert="layout/layouts.html :: 'navs' "></header>
+        <h3 th:text="${assessment.id == null ? 'Add assessment' : 'Edit assessment'}"></h3>
+        <form th:action="@{/assessments-templates/assessments/editForm}"
+              th:object="${assessment}" method="post" class="form-horizontal">
+
+            <div style="margin-bottom: 25px" class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input th:field="*{id}" placeholder="Id (*)" class="form-control" hidden/>
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Assessment</span>
+                </div>
+                <input type="number" required pattern="[1-5]{1}" th:field="*{assessment}" class="form-control"
+                       aria-describedby="basic-addon1" width="200px">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">Student</label>
+                </div>
+                <select th:field="*{student}">
+                    <th:block th:each="student : ${studentList}">
+                        <option th:value="${student.id}">[[${student.getName + ' ' + student.Lastname}]]</option>
+                    </th:block>
+                </select>
+            </div>
+
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text">Date</label>
+            </div>
+                <input type="date" th:field="*{date}" class="form-control" width="200px"/>
+                <!--        <input type="date" th:value="*{date}" th:field="*{date}" />-->
+                <!--        <input type="date" th:value="${#temporals.createDate(*{date})}" class="form-control"/>-->
+            </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text">Subject</label>
+            </div>
+                <select th:field="*{subject}">
+                    <th:block th:each="subject : ${subjectList}">
+                        <option th:value="${subject.id}">[[${subject.subjectName}]]</option>
+                    </th:block>
+                </select>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-success">Save</button>
+                <!-- кнопка отмены -->
+                <a th:href="@{/assessments}" class="btn btn-danger">Cancel</a>
+            </div>
+        </form>
+    </div>
+    <footer th:insert="layout/layouts :: 'footer'"></footer>
+
+</div>
+
+</body>
+</html>

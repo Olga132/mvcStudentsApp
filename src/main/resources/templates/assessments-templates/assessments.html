@@ -19,11 +19,14 @@
 
     <div class="container-fluid text-center content">
         <h3>Assessments list</h3>
+        <div class="main__item">
+            <a th:href="@{/assessments-templates/assessments/add}" class="btn btn-outline-success me-2"> Add new assessment </a>
+        </div>
         <table class="table table-bordered">
             <thead class="table-dark">
             <tr>
                 <th>Id</th>
-                <th>Student</th>
+                <th>Student (ID)</th>
                 <th>Date</th>
                 <th>Subject</th>
                 <th>Assessment</th>
@@ -34,22 +37,23 @@
             <tr th:each="assessmentV : ${listAssessments}">
                 <td th:text="${assessmentV.id}"/>
                 <td th:text="${assessmentV.student}"/>
-<!--                <td th:text="${assessmentV.date}"/>-->
+                <!--                <td th:text="${assessmentV.date}"/>-->
                 <td th:text="${#temporals.format(assessmentV.date, 'dd-MM-yyyy')}"/>
                 <td th:text="${assessmentV.subject}"/>
                 <td th:text="${assessmentV.assessment}"/>
                 <td>
                     <div class="dropdown">
-                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                             Action button
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-<!--                            <li><a class="dropdown-item" th:href="@{'/students/details/' + ${student.id}}"-->
-<!--                                   th:text="Details"/></li>-->
-<!--                            <li><a class="dropdown-item" th:href="@{'/students/editForm/' + ${student.id}}"-->
-<!--                                   th:text="Update"/></li>-->
-                            <li><a class="dropdown-item" th:href="@{'/assessment/remove/' + ${assessmentV.id}}"
+                            <!--                            <li><a class="dropdown-item" th:href="@{'/students/details/' + ${student.id}}"-->
+                            <!--                                   th:text="Details"/></li>-->
+                            <!--                            <li><a class="dropdown-item" th:href="@{'/students/editForm/' + ${student.id}}"-->
+                            <!--                                   th:text="Update"/></li>-->
+                            <li><a class="dropdown-item"
+                                   th:href="@{'/assessments-templates/assessments/remove/' + ${assessmentV.id}}"
                                    th:text="Delete"/>
                             </li>
                         </ul>
@@ -63,7 +67,7 @@
             </tbody>
 
         </table>
-        <a th:href="@{/assessments/add}" class="btn btn-secondary"> Add new assessment </a>
+
     </div>
     <footer th:insert="layout/layouts :: 'footer'"></footer>
 </div>

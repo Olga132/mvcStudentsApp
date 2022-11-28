@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface AssessmentRepository extends CrudRepository<Assessment, Long>, JpaRepository<Assessment, Long> {
     // получение всех оценок студента по Id
-    @Query("select a from Assessment a where a.student.id=:studentId")
+    @Query("select a from Assessment a where a.student.id=:studentId order by a.subject.subjectName desc, a.date desc")
     List<Assessment> findAllAssessmentByStudentId(@Param("studentId") long studentId);
 
     // получение среднего балла по каждому предмету студента по Id студента
@@ -25,3 +25,4 @@ public interface AssessmentRepository extends CrudRepository<Assessment, Long>, 
 
 
 }
+

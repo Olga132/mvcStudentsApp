@@ -5,20 +5,42 @@
 }
 
 .content {
-    flex: 1
+    flex: 1;
 }
 
 
-.main
-{
+.main {
     display: flex;
     justify-content: space-between;
     /*flex-direction: row;*/
     /*flex-wrap: nowrap;*/
 }
 
-.main__item
-{
+.main__item {
     padding: 10px;
     margin-right: 5px;
+}
+
+.assessments_div {
+    margin: 35px;
+}
+
+.nav-item {
+    margin-left: 10px;
+}
+
+select, input {
+    width: 300px; /* Ширина списка в пикселах */
+}
+
+.but-back {
+    margin-top: 10px;
+}
+
+li {
+    list-style-type: none;
+}
+
+.ass-form {
+    margin: 20px;
 }

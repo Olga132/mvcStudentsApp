@@ -33,15 +33,15 @@
                         <td th:text="${group.id}"/>
                         <td th:text="${group.groupName}"/>
                         <td>
-                            <a th:href="@{'/groups/editForm/' + ${group.id}}" th:text="Update" class="btn btn-success"/>
-                            <a th:href="@{'/groups/remove/' + ${group.id}}" th:text="Delete" class="btn btn-danger"/>
+                            <a th:href="@{'/groups-templates/groups/editForm/' + ${group.id}}" th:text="Update" class="btn btn-success"/>
+                            <a th:href="@{'/groups-templates/groups/remove/' + ${group.id}}" th:text="Delete" class="btn btn-danger"/>
                         </td>
                     </tr>
                     </tbody>
 
                 </table>
 
-                <a th:href="@{/groups/addGroup}" class="btn btn-secondary"> Add new group </a>
+                <a th:href="@{/groups-templates/groups/addGroup}" class="btn btn-secondary"> Add new group </a>
             </div>
         </div>
         <footer th:insert="layout/layouts :: 'footer'"></footer>

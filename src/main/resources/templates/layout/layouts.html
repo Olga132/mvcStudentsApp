@@ -9,27 +9,28 @@
 <body>
 
 
-<div class="container-fluid text-center navbar-light bg-light py-2 my-2" th:fragment="navs">
+<div class="navbar-light bg-light py-2 my-2" th:fragment="navs">
   <ul class="nav justify-content-center">
     <li class="nav-item">
-      <a class="navbar-brand" aria-current="page" th:href="@{/}">Home</a>
+      <a class="btn btn-outline-dark" aria-current="page" th:href="@{/}">Home</a>
     </li>
     <li class="nav-item">
-      <a class="navbar-brand" th:href="@{/students}">Students</a>
+      <a class="btn btn-outline-dark" th:href="@{/students-templates/students}">Students</a>
     </li>
     <li class="nav-item">
-      <a class="navbar-brand" th:href="@{/groups}">Groups</a>
+      <a class="btn btn-outline-dark" th:href="@{/groups-templates/groups}">Groups</a>
     </li>
     <li class="nav-item">
-      <a class="navbar-brand" th:href="@{/assessments}">Assessments</a>
+      <a class="btn btn-outline-dark" th:href="@{/assessments-templates/assessments}">Assessments</a>
     </li>
     <li class="nav-item">
-      <a class="navbar-brand" th:href="@{/subjects}">Subjects</a>
+      <a class="btn btn-outline-dark" th:href="@{/subjects}">Subjects</a>
     </li>
+    <li class="nav-item">
         <form th:action="@{/logout}" method="post">
-            <button>Log out</button>
+            <button type="button" class="btn btn-outline-dark">Log out</button>
         </form>
-
+    </li>
   </ul>
 </div>
 

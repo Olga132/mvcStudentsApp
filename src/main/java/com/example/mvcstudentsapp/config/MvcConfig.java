@@ -1,4 +1,4 @@
-package com.example.mvcstudentsapp.controllers.config;
+package com.example.mvcstudentsapp.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;

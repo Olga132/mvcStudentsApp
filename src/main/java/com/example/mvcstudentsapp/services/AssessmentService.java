@@ -1,6 +1,7 @@
 package com.example.mvcstudentsapp.services;
 
 import com.example.mvcstudentsapp.entities.Assessment;
+import com.example.mvcstudentsapp.entities.Student;
 import com.example.mvcstudentsapp.entities.Subject;
 import com.example.mvcstudentsapp.repositories.AssessmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class AssessmentService {
@@ -35,6 +37,13 @@ public class AssessmentService {
 
     public Double findAvgScoreSubjectByStudentId(long studentId) {
         return assessmentRepository.findAvgScoreSubjectByStudentId(studentId);
+    }
+
+    public void deleteById(Long id) {
+        // 1. найти студента для удаления
+        Optional<Assessment> deleted = assessmentRepository.findById(id);
+        // 2. если такой студент есть, то удалить его
+        deleted.ifPresent(assessment -> assessmentRepository.delete(assessment));
     }
 
 //    public List<Assessment> findAllStudentGrades(long studentId){

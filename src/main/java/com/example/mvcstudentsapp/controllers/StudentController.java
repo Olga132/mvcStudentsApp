@@ -1,9 +1,7 @@
 package com.example.mvcstudentsapp.controllers;
 
 import com.example.mvcstudentsapp.controllers.filter.StudentNameFilter;
-import com.example.mvcstudentsapp.entities.Assessment;
 import com.example.mvcstudentsapp.entities.Student;
-import com.example.mvcstudentsapp.entities.Subject;
 import com.example.mvcstudentsapp.services.AssessmentService;
 import com.example.mvcstudentsapp.services.GroupService;
 import com.example.mvcstudentsapp.services.StudentService;
@@ -14,10 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
-@RequestMapping("/students")
+@RequestMapping("students-templates/students")
 public class StudentController {
     @Autowired
     private StudentService studentService;
@@ -44,7 +41,7 @@ public class StudentController {
         List<Student> listStudents = studentService.getAllWithFilter(match);
         model.addAttribute("listStudents", listStudents);
         model.addAttribute("match", match);
-        return "students";
+        return "students-templates/students";
     }
 
     @PostMapping()
@@ -52,7 +49,7 @@ public class StudentController {
         List<Student> studentList = filter.getFilteredStudents(studentService);
         model.addAttribute("studentsList", studentList);
         model.addAttribute("containsFilter", filter);
-        return "students";
+        return "students-templates/students";
     }
 
 
@@ -60,7 +57,7 @@ public class StudentController {
     public String addNew(Model model) {
         model.addAttribute("student", new Student());
         model.addAttribute("groupsList", groupService.listAllGroups());
-        return "student-form";
+        return "students-templates/student-form";
     }
 
     @GetMapping("/details/{id}")
@@ -71,7 +68,7 @@ public class StudentController {
         modal.addAttribute("avgValue", assessmentService.findAvgScoreSubjectByStudentId(id));
         modal.addAttribute("allAssessmentsAVG", assessmentService.findAvgAssessmentsByStudentId(id));
 
-        return "student-details";
+        return "students-templates/student-details";
     }
 
     @GetMapping("/editForm/{id}")
@@ -79,7 +76,7 @@ public class StudentController {
         Student student = studentService.getById(id).get();
         modal.addAttribute("student", student);
         modal.addAttribute("groupsList", groupService.listAllGroups());
-        return "student-form";
+        return "students-templates/student-form";
     }
 
     @PostMapping("/editForm")
@@ -89,7 +86,7 @@ public class StudentController {
         ra.addFlashAttribute("message",
                 "Student " + std + " saved successfully");
         // 3. выполнить перенаправление
-        return "redirect:/students";
+        return "redirect:/students-templates/students";
     }
 
 //    @GetMapping("/remove/{id}")
@@ -102,7 +99,7 @@ public class StudentController {
     public String removeById(@PathVariable(value = "id") Long id, RedirectAttributes ra) {
         studentService.deleteById(id);
         ra.addFlashAttribute("message", "Student delete");
-        return "redirect:/students";
+        return "redirect:/students-templates/students";
     }
 
 }

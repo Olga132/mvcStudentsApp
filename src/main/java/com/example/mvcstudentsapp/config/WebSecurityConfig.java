@@ -1,4 +1,4 @@
-package com.example.mvcstudentsapp.controllers.config;
+package com.example.mvcstudentsapp.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/", "/students").permitAll()
+                        .antMatchers("/").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form

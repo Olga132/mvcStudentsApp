@@ -15,8 +15,8 @@ public class Subject {
     @Column(nullable = false, length = 50)
     private String subjectName;
 
-//    @OneToMany(mappedBy = "subject")
-//    private Set<Assessment> assessments;
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.PERSIST)
+    private Set<Assessment> assessments;
 
     public Long getId() {
         return id;
